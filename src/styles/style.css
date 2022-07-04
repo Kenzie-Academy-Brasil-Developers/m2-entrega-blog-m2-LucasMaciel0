@@ -1,0 +1,46 @@
+body{
+    background-color: #6495ED;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;  
+}
+
+input{
+    margin-top: 20px;
+    width: 20%;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: large;
+}
+
+button{
+    margin-top: 20px;
+    padding: 15px;
+    background-color: burlywood;
+    width: 300px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: coral;
+    transition: 2s;
+}
+
+ h3{
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+ }
