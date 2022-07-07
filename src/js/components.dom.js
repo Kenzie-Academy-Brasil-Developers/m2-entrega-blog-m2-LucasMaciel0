@@ -1,4 +1,32 @@
+import UserRequests from "./controllers/user.controller.js"
+import LoguinRequest from "./controllers/loguin.controller.js"
+
+
 export default class Modal {
+
+    static CriarHeader(){
+        const body = document.querySelector('body')
+
+        const header = document.createElement('header')
+        const div = document.createElement('div')
+        const p = document.createElement('p')
+        const buttonLoguin = document.createElement('button')
+        const buttonCadastrar = document.createElement('button')
+
+        p.innerText = 'BlogKenzie'
+        buttonLoguin.innerText = "Loguin"
+        buttonLoguin.addEventListener('click',(event)=>{
+            this.CriaModalLoguin()
+        })
+        buttonCadastrar.innerText = "Cadastrar"
+        buttonCadastrar.addEventListener('click',(event)=>{
+            this.CriaModalCadastro()
+        })
+        div.append(buttonLoguin,buttonCadastrar,p)
+        header.append(div)
+        body.append(header)
+    }
+
     static CriaModalLoguin(){
         const body = document.querySelector('body')
 
@@ -35,10 +63,29 @@ export default class Modal {
         botaoLoguin.id = "botaoLoguin"
         botaoLoguin.innerText = "Loguin"
 
+        botaoLoguin.addEventListener('click',async(event)=>{
+            event.preventDefault()
+            const desconstruido = [...event.srcElement.form]
+        
+            let array = []
+            desconstruido.forEach((elem)=>{
+                array.push(elem.value)
+            })
+            array.pop()
+
+            let modelo = {
+                "email": array[0],
+                "password":array[1]
+            }
+            
+            LoguinRequest.loguin(modelo)
+            divSuperior.style = "display:none"
+            Modal.Noticias()
+        })
+
         form.append(h3,inputEmail,inputPassword,botaoLoguin)
         divINferior.append(botaoClose,form)
         divSuperior.appendChild(divINferior)
-
         body.appendChild(divSuperior)
     }
 
@@ -85,6 +132,29 @@ export default class Modal {
         botaoCadastro.type = "submit"
         botaoCadastro.id = "botaoCadastro"
         botaoCadastro.innerText = "Cadastrar"
+
+        botaoCadastro.addEventListener('click',async (event)=>{
+            event.preventDefault()
+            const desconstruido = [...event.srcElement.form]
+        
+            let array = []
+            desconstruido.forEach((elem)=>{
+                array.push(elem.value)
+            })
+            array.pop()
+            
+            let modelo = {
+                "username":array[0],
+                "email":array[1],
+                "avatarUrl":array[2],
+                "password":array[3]
+            }
+            
+            UserRequests.createUser(modelo)
+            divSuperior.style = "display:none"
+            this.CriaModalLoguin()
+    })
+        
         p.innerHTML = "Já tem Loguin ?<a href = #> Clique aqui</a> "
 
         p.addEventListener('click', (event)=>{
@@ -97,5 +167,28 @@ export default class Modal {
         divSuperior.appendChild(divINferior)
 
         body.appendChild(divSuperior)
+    }
+
+    static async Noticias(){
+        const body = document.querySelector('body')
+            
+
+            let noticias = await UserRequests.Post()
+            console.log(noticias)
+
+            noticias.data.forEach((content)=>{
+            const div = document.createElement('div')
+            const img = document.createElement('img')
+            const usuario = document.createElement('h4')
+            const p = document.createElement('p')
+
+            img.src = content.user.avatarUrl
+            usuario.innerText = content.user.username
+            p.innerText = content.content
+
+            div.append(img,usuario,p)
+            body.append(div)
+
+        })
     }
 }

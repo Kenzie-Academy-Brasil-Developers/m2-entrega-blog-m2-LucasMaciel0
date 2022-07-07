@@ -1,11 +1,11 @@
 export default class LoguinRequest {
     static base_url = "https://blog-m2.herokuapp.com/users/login"
-
+    
     static async loguin (loguinData){
         return await fetch(this.base_url,{
             method: "POST",
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
             },
             body: JSON.stringify(loguinData)
         })
