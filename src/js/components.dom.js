@@ -27,6 +27,26 @@ export default class Modal {
         body.append(header)
     }
 
+    static CriarHeaderHomePage(){
+        const body = document.querySelector('body')
+
+        const header = document.createElement('header')
+        const div = document.createElement('div')
+        const p = document.createElement('p')
+        const buttonLogout = document.createElement('button')
+        
+
+        p.innerText = 'BlogKenzie'
+        buttonLogout.innerText = "Logout"
+        buttonLogout.addEventListener('click',()=>{
+            window.location.replace('index.html')
+        })
+        
+        div.append(buttonLogout,p)
+        header.append(div)
+        body.append(header)
+    }
+
     static CriaModalLoguin(){
         const body = document.querySelector('body')
 
@@ -80,7 +100,8 @@ export default class Modal {
             
             LoguinRequest.loguin(modelo)
             divSuperior.style = "display:none"
-            Modal.Noticias()
+            window.location.href = "homePage.html"
+            //Modal.Noticias()
         })
 
         form.append(h3,inputEmail,inputPassword,botaoLoguin)
@@ -174,7 +195,6 @@ export default class Modal {
             
 
             let noticias = await UserRequests.Post()
-            console.log(noticias)
 
             noticias.data.forEach((content)=>{
             const div = document.createElement('div')
@@ -190,5 +210,7 @@ export default class Modal {
             body.append(div)
 
         })
+        console.log(noticias)
     }
+    
 }
