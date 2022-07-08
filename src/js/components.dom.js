@@ -39,7 +39,8 @@ export default class Modal {
         p.innerText = 'BlogKenzie'
         buttonLogout.innerText = "Logout"
         buttonLogout.addEventListener('click',()=>{
-            window.location.replace('index.html')
+            localStorage.clear()
+            window.location.href = "index.html"
         })
         
         div.append(buttonLogout,p)
@@ -85,14 +86,15 @@ export default class Modal {
 
         botaoLoguin.addEventListener('click',async(event)=>{
             event.preventDefault()
-            const desconstruido = [...event.srcElement.form]
+            const desconstruido = [...event.target.form]
         
             let array = []
             desconstruido.forEach((elem)=>{
                 array.push(elem.value)
+
             })
             array.pop()
-
+            
             let modelo = {
                 "email": array[0],
                 "password":array[1]
@@ -100,8 +102,9 @@ export default class Modal {
             
             LoguinRequest.loguin(modelo)
             divSuperior.style = "display:none"
-            window.location.href = "homePage.html"
-            //Modal.Noticias()
+    
+            
+        
         })
 
         form.append(h3,inputEmail,inputPassword,botaoLoguin)
@@ -192,7 +195,6 @@ export default class Modal {
 
     static async Noticias(){
         const body = document.querySelector('body')
-            
 
             let noticias = await UserRequests.Post()
 
@@ -201,16 +203,33 @@ export default class Modal {
             const img = document.createElement('img')
             const usuario = document.createElement('h4')
             const p = document.createElement('p')
+            const divInferior = document.createElement('div')
+            const divSuperior = document.createElement('div')
+            
+            divInferior.classList.add('divInferior')
+            div.classList.add('container')
+            img.classList.add('img')
+            usuario.classList.add('titulo')
+            p.classList.add('texto')
+            divSuperior.classList.add('divSuperior')
 
             img.src = content.user.avatarUrl
             usuario.innerText = content.user.username
             p.innerText = content.content
 
-            div.append(img,usuario,p)
-            body.append(div)
+            divInferior.append(usuario,p)
+            div.append(img,divInferior)
+            divSuperior.appendChild(div)
+            body.append(divSuperior)
 
         })
         console.log(noticias)
     }
     
+    static textArea (){
+        const body = document.querySelector('body')
+        const textArea = document.createElement('textarea')
+        textArea.placeholder = "Escreva aqui seu comentário"
+        body.appendChild(textArea)
+    }
 }

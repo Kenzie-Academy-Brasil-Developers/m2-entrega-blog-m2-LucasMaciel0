@@ -24,7 +24,7 @@ export default class UserRequests {
             }
         })
         .then(res=>res.json())
-        .then(res=>res)
+        .then((res)=>res)
         .catch(err=>console.log(err))
     }
 

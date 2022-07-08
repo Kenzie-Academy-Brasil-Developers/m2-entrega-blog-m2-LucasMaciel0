@@ -7,13 +7,18 @@ export default class LoguinRequest {
             headers:{
                 "Content-Type":"application/json",
             },
-            body: JSON.stringify(loguinData)
+            body: JSON.stringify(loguinData),
         })
         .then(res => res.json())
-        .then((res)=>{
-            localStorage.setItem("@kenzie-blog:user",JSON.stringify(res.userId))
-            localStorage.setItem("@kenzie-blog:token",JSON.stringify(res.token))
-            return res
+        .then((res) => {
+            console.log(res)
+            if(!res.message){
+                localStorage.setItem("@kenzie-blog:user",JSON.stringify(res.userId))
+                localStorage.setItem("@kenzie-blog:token",JSON.stringify(res.token))
+                window.location.href="homePage.html"
+            }else{
+                alert(res.message)
+            }
         })
         .catch(err => console.log(err))
     }

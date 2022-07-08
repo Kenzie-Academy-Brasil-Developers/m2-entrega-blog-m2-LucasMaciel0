@@ -1,0 +1,109 @@
+header{
+    background-color: rgba(100, 149, 237, 1);
+    padding: 2rem;
+    box-shadow: 0px 2px 5px gray;
+}
+
+header > div{
+    display: flex;
+    gap: 2rem;
+}
+
+header > div > p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: white;
+    font-size: 2rem;
+    font-family:monospace ;
+}
+
+div > button{
+    padding: 0.8rem;
+    width: 7rem;
+    background-color: rgba(237, 188, 100, 1);
+    border-radius: 0.5rem;
+    border-style: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+}
+div > button:hover{
+    background-color: coral;
+    transition: 0.5s;
+}
+
+.modal-container{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    background-color: #6495ED;
+    width: 40%;
+    height: auto;
+    min-width: 300px;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 1px black;
+    position: relative;
+    
+}
+
+ p{
+    color: white;
+    font-family: monospace;
+    font-size: 1.5rem;
+}
+
+.fechar{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.5);
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+ .form > input{
+    padding: 1rem;
+    border-radius: 5px;
+    border-style: none;
+    width: 14rem;
+ }
+
+ .form > button {
+    background-color:rgba(237, 188, 100, 1);
+    padding: .5rem;
+    width: 9rem;
+    border-radius: 5px;
+    border-style: none;
+    color: white;
+    font-family:monospace ;
+    font-size: 1.5rem;
+    cursor: pointer;
+ }
+
+ .form > h3{
+    color: white;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 2rem;
+ }
